@@ -13,9 +13,12 @@ int execute(char **argv, char **env)
 
 	if (argv == NULL)
 		return (1);
-	if (strcmp(argv[0],"exit") == 0)
-	       exit(0);
+
+	if (strcmp(argv[0], "exit") == 0)
+		exit(0);
+
 	command = find(argv[0]);
+
 	if (command == NULL)
 	{
 		perror("./shell");

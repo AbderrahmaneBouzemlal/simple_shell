@@ -18,7 +18,7 @@ char *find(char *command)
 	while (token)
 	{
 		cmd_full = malloc(strlen(token) + strlen(command) + 2);
-		
+
 		if (cmd_full == NULL)
 		{
 			free(path_copy);

@@ -19,7 +19,7 @@ int main(int ac, char **av, char **env)
 	{
 		printf("$ ");
 		read = getline(&line, &n, stdin);
-		
+
 		if (read == -1)
 		{
 			putchar('\n');
@@ -36,10 +36,10 @@ int main(int ac, char **av, char **env)
 		}
 
 		execute(str, env);
-		free (str);
+		free(str);
 	}
 	while (*str)
 		free(*str);
-	free (line);
+	free(line);
 	return (0);
 }

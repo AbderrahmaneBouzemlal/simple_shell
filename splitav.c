@@ -8,7 +8,7 @@ char **split(char *line)
 {
 	char *token;
 	char **tmp;
-	char **str = malloc(sizeof(char*) * BUFFER_SIZE);
+	char **str = malloc(sizeof(char *) * BUFFER_SIZE);
 	int i = 0;
 	int j;
 
@@ -17,7 +17,7 @@ char **split(char *line)
 	{
 		str[i] = token;
 
-		if(str[i] == NULL)
+		if (str[i] == NULL)
 		{
 			free(str);
 			return (NULL);
@@ -27,9 +27,9 @@ char **split(char *line)
 		tmp = realloc(str, (i + 1) * sizeof(char *));
 		if (tmp == NULL)
 		{
-			for(j = 0; str != NULL; j++)
+			for (j = 0; str != NULL; j++)
 				free(str);
-			for(j = 0; str != NULL; j++)
+			for (j = 0; str != NULL; j++)
 				free(tmp);
 			return (NULL);
 		}
