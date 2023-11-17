@@ -16,13 +16,18 @@ int execute(char **argv, char **env)
 
 	if (strcmp(argv[0], "exit") == 0)
 		exit(0);
-
-	command = find(argv[0]);
-
-	if (command == NULL)
+	if (strcmp(argv[0], "env") == 0)
+		exit(0);
+	if (access(argv[0], F_OK) == 0)
+		command = strdup(argv[0]);
+	else
 	{
-		perror("./shell");
-		return (1);
+		command = strdup(find(argv[0]));
+		if (command == NULL)
+		{
+			perror("./shell");
+			return (1);
+		}
 	}
 	chpro = fork();
 	if (chpro == -1)

@@ -38,8 +38,7 @@ int main(int ac, char **av, char **env)
 		execute(str, env);
 		free(str);
 	}
-	while (*str)
-		free(*str);
+	free(str);
 	free(line);
 	return (0);
 }

@@ -12,9 +12,6 @@ char *find(char *command)
 	char *cmd_full = NULL;
 	struct stat st;
 
-	if (access(command, F_OK) == 0)
-		return (command);
-
 	while (token)
 	{
 		cmd_full = malloc(strlen(token) + strlen(command) + 2);
