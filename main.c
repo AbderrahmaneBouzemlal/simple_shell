@@ -23,9 +23,8 @@ int main(int ac, char **av, char **env)
 
 		if (read == -1)
 		{
-			write(1, "\n", 1);
 			free(line);
-			return (1);
+			exit(0);
 		}
 		str = split(line);
 
