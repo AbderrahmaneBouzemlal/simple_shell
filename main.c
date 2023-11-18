@@ -8,6 +8,7 @@
  */
 int main(int ac, char **av, char **env)
 {
+	int i;
 	char **str;
 	char *line = NULL;
 	size_t n = 0;
@@ -30,15 +31,15 @@ int main(int ac, char **av, char **env)
 
 		if (str == NULL)
 		{
-			while (*str)
-				free(*str);
+			for (i = 0; str[i] != NULL; i++)
+				free(str[i]);
+			free(str);
 			exit(1);
 		}
 
 		execute(str, env);
 		free(str);
 	}
-	free(str);
 	free(line);
 	return (0);
 }

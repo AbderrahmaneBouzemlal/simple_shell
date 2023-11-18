@@ -28,11 +28,11 @@ char **split(char *line)
 		if (tmp == NULL)
 		{
 			for (j = 0; str != NULL; j++)
-				free(str);
-			for (j = 0; str != NULL; j++)
-				free(tmp);
+				free(str[j]);
+			free(str);
 			return (NULL);
 		}
+		str = tmp;
 		token = strtok(NULL, " \n\t");
 	}
 	str[i] = NULL;
