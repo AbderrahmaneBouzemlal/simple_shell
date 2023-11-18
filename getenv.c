@@ -4,7 +4,6 @@
  * @var: The variable we are going to look for
  * Return: A pointer to a string
  */
-extern char **environ;
 char *_getenv(const char *var)
 {
 	register const char *np;
