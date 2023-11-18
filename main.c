@@ -17,12 +17,12 @@ int main(int ac, char **av, char **env)
 
 	while (1)
 	{
-		printf("$ ");
+		write(1, "$ ", 2);
 		read = getline(&line, &n, stdin);
 
 		if (read == -1)
 		{
-			putchar('\n');
+			write(1, "\n", 1);
 			free(line);
 			return (1);
 		}
