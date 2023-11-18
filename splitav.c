@@ -12,7 +12,7 @@ char **split(char *line)
 	int i = 0;
 	int j;
 
-	token = strtok(line, " \n\t");
+	token = _strtok(line, " \n\t");
 	while (token)
 	{
 		str[i] = token;
@@ -33,7 +33,7 @@ char **split(char *line)
 			return (NULL);
 		}
 		str = tmp;
-		token = strtok(NULL, " \n\t");
+		token = _strtok(NULL, " \n\t");
 	}
 	str[i] = NULL;
 	return (str);

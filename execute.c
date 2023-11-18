@@ -14,7 +14,7 @@ int execute(char **argv, char **env)
 
 	if (argv == NULL || argv[0] == NULL)
 		return (1);
-	if (strcmp(argv[0], "exit") == 0)
+	if (_strcmp(argv[0], "exit") == 0)
 		exit(0);
 	if (access(argv[0], F_OK) == 0)
 		command = argv[0];

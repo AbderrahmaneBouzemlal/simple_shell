@@ -9,6 +9,14 @@
 #include <string.h>
 #include <sys/stat.h>
 extern char **environ;
+void _putchar(char str);
+char *_strdup(const char *s);
+int _strncmp(const char *s1, const char *s2, size_t n);
+char *_strtok(register char *s, register const char *delim);
+char *_strcpy(char *dest, char *src);
+int _strlen(const char *s);
+int _strcmp(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
 char **split(char *line);
 int execute(char **argv, char **env);
 char *find(char *command);

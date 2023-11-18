@@ -7,8 +7,8 @@
 char *find(char *command)
 {
 	char *path = _getenv("PATH");
-	char *path_copy = strdup(path);
-	char *token = strtok(path_copy, ":");
+	char *path_copy = _strdup(path);
+	char *token = _strtok(path_copy, ":");
 	char *cmd_full = NULL;
 	struct stat st;
 
@@ -16,7 +16,7 @@ char *find(char *command)
 		return (NULL);
 	while (token)
 	{
-		cmd_full = malloc(strlen(token) + strlen(command) + 2);
+		cmd_full = malloc(_strlen(token) + _strlen(command) + 2);
 
 		if (cmd_full == NULL)
 		{
@@ -24,9 +24,9 @@ char *find(char *command)
 			exit(0);
 		}
 
-		strcpy(cmd_full, token);
-		strcat(cmd_full, "/");
-		strcat(cmd_full, command);
+		_strcpy(cmd_full, token);
+		_strcat(cmd_full, "/");
+		_strcat(cmd_full, command);
 
 		if (stat(cmd_full, &st) == 0)
 		{
@@ -35,7 +35,7 @@ char *find(char *command)
 		}
 
 		free(cmd_full);
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(path_copy);
 
