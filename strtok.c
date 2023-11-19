@@ -1,61 +1,61 @@
 #include "main.h"
-#include <stddef.h>
-#include <string.h>
 /**
- *_strtok - function that breaks a string into a sequence of zero or more nonempty tokens
- *@s: string to be tokenized
- *@delim: delimiter character
- *Return: pointer to the next token or NULL if there are no more tokens 
+ * is_delim - checks if a character is a delimiter
+ * @c: character to check
+ * @delim: delimiter
+ * Return: 1 if true, 0 if false
  */
-
-char *_strtok(register char *s, register const char *delim)
+unsigned int is_delim(char c, const char *delim)
 {
-	register char *spanp;
-	register int c, sc;
-	char *tok;
-	static char *last;
+	while (*delim != '\0')
+	{
+		if (c == *delim)
+			return (1);
+		delim++;
+	}
+	return (0);
+}
+/**
+ * _strtok - tokenizes a string
+ * @srcString: string to tokenize
+ * @delim: delimiter
+ * Return: pointer to the next token
+ */
+char *_strtok(char *srcString, const char *delim)
+{
+	static char *backup_string;
+	char *ret = srcString;
 
-
-	if (s == NULL && (s = last) == NULL)
+	if (!srcString)
+	{
+		srcString = backup_string;
+	}
+	if (!srcString)
+	{
 		return (NULL);
-
-	/*
-	 * Skip (span) leading delimiters (s += strspn(s, delim), sort of).
-	 */
-cont:
-	c = *s++;
-	for (spanp = (char *)delim; (sc = *spanp++) != 0;) 
-    {
-		if (c == sc)
-			goto cont;
 	}
-
-	if (c == 0) 
-    {
-		last = NULL;
+	while (is_delim(*srcString, delim))
+	{
+		srcString++;
+	}
+	if (*srcString == '\0')
+	{
+		backup_string = srcString;
 		return (NULL);
 	}
-	tok = s - 1;
-
-	/*
-	 * Scan token (scan for delimiters: s += strcspn(s, delim), sort of).
-	 * Note that delim must have one NUL; we stop if we see that, too.
-	 */
-	for (;;) 
-    {
-		c = *s++;
-		spanp = (char *)delim;
-		do 
-        {
-			if ((sc = *spanp++) == c) 
-            {
-				if (c == 0)
-					s = NULL;
-				else
-					s[-1] = 0;
-				last = s;
-				return (tok);
-			}
-		} while (sc != 0);
+	ret = srcString;
+	while (*srcString != '\0' && !is_delim(*srcString, delim))
+	{
+		srcString++;
 	}
+	if (*srcString == '\0')
+	{
+		backup_string = srcString;
+	}
+	else
+	{
+		*srcString = '\0';
+		backup_string = srcString + 1;
+	}
+	return (ret);
 }
