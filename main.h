@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 extern char **environ;
+int loop(char **env);
 void _putchar(char str);
 char *_strdup(const char *s);
 int _strncmp(const char *s1, const char *s2, size_t n);
