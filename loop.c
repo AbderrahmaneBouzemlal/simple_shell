@@ -1,4 +1,5 @@
 #include "main.h"
+#include "string.h"
 /**
  * loop - main loop
  * @env: environment
@@ -14,13 +15,25 @@ int loop(char **env)
 
 	while (1)
 	{
-		write(1, "$ ", 2);
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "$ ", 2);
+
 		read = getline(&line, &n, stdin);
 
 		if (read == -1)
 		{
-			free(line);
-			exit(0);
+			if (feof(stdin))
+			{
+				write(1, "\n", 1);
+				free(line);
+				exit(0);
+			}
+			else
+			{
+				perror("getline");
+				free(line);
+				exit(1);
+			}
 		}
 		str = split(line);
 
