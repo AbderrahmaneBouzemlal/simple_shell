@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 extern char **environ;
-int loop(char **env);
+int loop(char **env, char **av);
 void _putchar(char str);
 char *_strdup(const char *s);
 int _strncmp(const char *s1, const char *s2, size_t n);
@@ -20,8 +20,8 @@ int _strlen(const char *s);
 int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
 char **split(char *line);
-int execute(char **argv, char **env);
+int execute(char **argv, char **env, char **av);
 char *find(char *command);
 char *_getenv(const char *var);
-
+int err_handle(char *shell_name, int count, char *command, char *errorText);
 #endif

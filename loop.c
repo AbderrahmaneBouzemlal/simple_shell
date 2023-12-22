@@ -3,11 +3,12 @@
 /**
  * loop - main loop
  * @env: environment
+ * @av: The program arguments
  * Return: 0 on success, 1 on failure
  */
-int loop(char **env)
+int loop(char **env, char **av)
 {
-	int i;
+	int count = 0, retu_exec, i;
 	char **str;
 	char *line = NULL;
 	size_t n = 0;
@@ -15,28 +16,18 @@ int loop(char **env)
 
 	while (1)
 	{
+		count++;
 		if (isatty(STDIN_FILENO) == 1)
 			write(1, "$ ", 2);
-
 		read = getline(&line, &n, stdin);
-
 		if (read == -1)
 		{
-			if (feof(stdin))
-			{
+			if (isatty(STDIN_FILENO) == 1)
 				write(1, "\n", 1);
-				free(line);
-				exit(0);
-			}
-			else
-			{
-				perror("getline");
-				free(line);
-				exit(1);
-			}
+			free(line);
+			exit(1);
 		}
 		str = split(line);
-
 		if (str == NULL)
 		{
 			for (i = 0; str[i] != NULL; i++)
@@ -44,8 +35,9 @@ int loop(char **env)
 			free(str);
 			exit(1);
 		}
-
-		execute(str, env);
+		retu_exec = execute(str, env, av);
+		if (retu_exec == 1)
+			err_handle(av[0], count, str[0], "not found\n");
 		free(str);
 	}
 	free(line);
