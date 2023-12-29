@@ -24,5 +24,5 @@ int execute(char **argv, char **env, char **av);
 char *find(char *command);
 char *_getenv(const char *var);
 int err_handle(char *shell_name, int count, char *command, char *errorText);
-ssize_t my_getline(char **restrict pline, size_t *restrict len,FILE *restrict fp);
+ssize_t my_getline(char **pline, size_t *len,FILE *fp);
 #endif

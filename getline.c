@@ -1,34 +1,54 @@
 #include "main.h"
 /**
  * my_getline - function to get input from the user
- * @lineptr: the address of the buffer containing the text
- * @n: The size of the lineptr
- * @stream: the stream that the line is in
+ * @pline: the address of the buffer containing the text
+ * @len: The size of the lineptr
+ * @fp: the stream that the line is in
  * Return: The number of the characters ridden (success)
  * Otherwise in faillure return -1 and in EOF case also
  */
-ssize_t my_getline(char **restrict pline, size_t *restrict len,FILE *restrict fp)
+ssize_t my_getline(char **pline, size_t *len, FILE *fp)
 {
-	if (pline == NULL || len == NULL) 
-	{
-		fputs("Error! Bad arguments.\n", stderr);
-		return (-1);
-	}
+	size_t i = 0;
+	int c;
+	char *temp;
 
-	if (fp == NULL) 
+	if (pline == NULL || len == NULL || fp == NULL)
 	{
-		fputs("Error! Bad file pointer.\n", stderr);
+		fputs("Error! Bad arguments or file pointer.\n", stderr);
 		return (-1);
 	}
-	char chunk [BUFFER_SIZE];
-	if (*pline == NULL)
+	if (*pline == NULL || *len == 0)
 	{
-		*len = sizeof(chunk);
-		if ((*pline = malloc(*len)) == NULL)
+		*len = BUFFER_SIZE;
+		*pline = malloc(*len);
+
+		if (*pline == NULL)
 		{
 			perror("Unable to allocate memory for the line buffer.");
 			return (-1);
 		}
-		(*pline) [0] = '\0';
+	}
+	while ((c = fgetc(fp)) != EOF && c != '\n')
+	{
+		(*pline)[i++] = (char)c;
+
+		if (i == *len - 1)
+		{
+			*len *= 2;
+			temp = realloc(*pline, *len);
+			if (temp == NULL)
+			{
+				perror("Unable to reallocate memory for the line buffer.");
+				return (-1);
+			}
+			*pline = temp;
+		}
+	}
+	(*pline)[i] = '\0';
+	if (c == EOF && i == 0)
+	{
 		return (-1);
+	}
+	return (i);
 }
