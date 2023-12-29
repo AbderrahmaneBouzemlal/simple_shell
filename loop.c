@@ -19,7 +19,7 @@ int loop(char **env, char **av)
 		count++;
 		if (isatty(STDIN_FILENO) == 1)
 			write(1, "$ ", 2);
-		read = getline(&line, &n, stdin);
+		read = my_getline(&line, &n, stdin);
 		if (read == -1)
 		{
 			if (isatty(STDIN_FILENO) == 1)
