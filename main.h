@@ -2,11 +2,13 @@
 #define MAIN_H
 #define BUFFER_SIZE 1024
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+void free_tokens(char **tokens, int count);
 extern char **environ;
 int loop(char **env, char **av);
 void _putchar(char str);

@@ -11,11 +11,11 @@ int execute(char **argv, char **env, char **av)
 {
 	pid_t chpro;
 	int status;
-	char *command;
+	char *command = NULL;
 
 	if (argv == NULL || argv[0] == NULL)
 		return (0);
-	if (_strcmp(argv[0], "exit") == 0)
+	if (strcmp(argv[0], "exit") == 0)
 		exit(0);
 	if (access(argv[0], F_OK) == 0)
 		command = argv[0];
@@ -23,9 +23,7 @@ int execute(char **argv, char **env, char **av)
 	{
 		command = find(argv[0]);
 		if (command == NULL)
-		{
 			return (1);
-		}
 	}
 	chpro = fork();
 	if (chpro == -1)
@@ -35,15 +33,17 @@ int execute(char **argv, char **env, char **av)
 		if (execve(command, argv, env) == -1)
 		{
 			perror(av[0]);
-			return (2);
+			free(command);
+			_exit(2);
 		}
 	}
 	else
 	{
 		waitpid(chpro, &status, 0);
+		if (command != argv[0])
+			free(command);
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
 	}
-	free(command);
 	return (0);
 }

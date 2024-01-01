@@ -6,35 +6,49 @@
  */
 char **split(char *line)
 {
+	int i = 0;
 	char *token;
 	char **tmp;
-	char **str = malloc(sizeof(char *) * BUFFER_SIZE);
-	int i = 0;
-	int j;
+	char **str;
+	int chunk = BUFFER_SIZE;
 
+	if (line == NULL || *line == '\0')
+		return (NULL);
+
+	str = malloc(sizeof(char *) * BUFFER_SIZE);
+	if (str == NULL)
+		return NULL;
 	token = _strtok(line, " \n\t");
 	while (token)
 	{
-		str[i] = token;
-
+		if (i >= chunk - 1) 
+		{
+			tmp = realloc(str, (chunk * 2) * sizeof(char *));
+			if (tmp == NULL)
+			{
+				free_tokens(str, i);
+				return (NULL);
+			}
+			str = tmp;
+			chunk *= 2;
+		}
+		str[i] = strdup(token);
 		if (str[i] == NULL)
 		{
-			free(str);
+			free_tokens(str, i);
 			return (NULL);
 		}
 		i++;
-
-		tmp = realloc(str, (i + 1) * sizeof(char *));
-		if (tmp == NULL)
-		{
-			for (j = 0; str != NULL; j++)
-				free(str[j]);
-			free(str);
-			return (NULL);
-		}
-		str = tmp;
 		token = _strtok(NULL, " \n\t");
 	}
 	str[i] = NULL;
 	return (str);
+}
+
+void free_tokens(char **tokens, int count)
+{
+	int i;
+	for (i = 0; i < count; i++)
+		free(tokens[i]);
+	free(tokens);
 }
