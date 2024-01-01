@@ -8,47 +8,41 @@
  */
 int loop(char **env, char **av)
 {
-    int count = 0, retu_exec, i;
-    char **str;
-    char *line = NULL;
-    size_t n = 0;
-    ssize_t read;
+	int count = 0, retu_exec, i;
+	char **str;
+	char *line = NULL;
+	size_t n = 0;
+	ssize_t read;
 
-    while (1)
-    {
-        count++;
-        if (isatty(STDIN_FILENO) == 1)
-            write(1, "$ ", 2);
-
-        read = getline(&line, &n, stdin);
-        if (read == -1)
-        {
-            if (isatty(STDIN_FILENO) == 1)
-                write(1, "\n", 1);
-            free(line);
-            return 0;
-        }
-
-        str = split(line);
-        if (str == NULL)
-        {
-            for (i = 0; str[i] != NULL; i++)
-                free(str[i]);
-            free(str);
-            continue;
-        }
-
-        retu_exec = execute(str, env, av);
-        if (retu_exec == 1)
-        {
-            err_handle(av[0], count, str[0], "not found\n");
-        }
-
-        for (i = 0; str[i] != NULL; i++)
-            free(str[i]);
-        free(str);
-    }
-
-    free(line);
-    return 0;
+	while (1)
+	{
+		count++;
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "$ ", 2);
+		read = getline(&line, &n, stdin);
+	if (read == -1)
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "\n", 1);
+		free(line);
+		return (0);
+	}
+	str = split(line);
+	if (str == NULL)
+	{
+		for (i = 0; str[i] != NULL; i++)
+			free(str[i]);
+		free(str);
+		continue;
+	}
+	retu_exec = execute(str, env, av);
+	if (retu_exec != 0)
+		err_handle(av[0], count, str[0], "not found\n");
+	for (i = 0; str[i] != NULL; i++)
+		free(str[i]);
+	free(str);
+	}
+	
+	free(line);
+	return (retu_exec);
 }
