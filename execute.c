@@ -23,7 +23,7 @@ int execute(char **argv, char **env, char **av)
 	{
 		command = find(argv[0]);
 		if (command == NULL)
-			return (1);
+			return (127);
 	}
 	chpro = fork();
 	if (chpro == -1)

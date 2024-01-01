@@ -24,8 +24,7 @@ int loop(char **env, char **av)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			write(1, "\n", 1);
-		free(line);
-		return (0);
+		break;
 	}
 	str = split(line);
 	if (str == NULL)
