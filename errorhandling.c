@@ -7,10 +7,16 @@
  * @errorText: The message
  * Return: The exit status
  */
-int err_handle(char *shell_name, int count, char *command, char *errorText)
+int err_handle(int error_number, char *shell_name, int count, char *command, char *Argument, char *errorText)
 {
 	int r;
 
-	r = fprintf(stderr, "%s: %d: %s: %s", shell_name, count, command, errorText);
+	if (error_number != 5)
+		r = fprintf(stderr, "%s: %d: %s: %s", shell_name, count, command, errorText);
+	else
+	{
+		strcat(Argument, "\n");
+		r = fprintf(stderr, "%s: %d: %s: %s: %s", shell_name, count, command, "Illegal number", Argument);
+	}
 	return (r);
 }

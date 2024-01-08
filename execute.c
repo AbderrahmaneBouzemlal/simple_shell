@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * execute - function that execute the commands
  * @argv: A pointer to an array of strings
@@ -10,13 +9,30 @@
 int execute(char **argv, char **env, char **av)
 {
 	pid_t chpro;
+	long stts = 0;
+	char *endptr;
 	int status;
 	char *command = NULL;
 
 	if (argv == NULL || argv[0] == NULL)
 		return (0);
 	if (strcmp(argv[0], "exit") == 0)
-		exit(0);
+	{
+		if (!argv[1])
+			exit(0);
+		else
+		{
+			stts = strtol(argv[1], &endptr, 10);
+			if (*endptr == '\0')
+			{
+				if (stts < 0)
+					return (5);
+				exit((int)stts);
+			}
+			else
+				return (5);
+		}
+	}
 	if (access(argv[0], F_OK) == 0)
 		command = argv[0];
 	else
