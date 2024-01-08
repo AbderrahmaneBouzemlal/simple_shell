@@ -17,11 +17,11 @@ char **split(char *line)
 
 	str = malloc(sizeof(char *) * BUFFER_SIZE);
 	if (str == NULL)
-		return NULL;
+		return (NULL);
 	token = _strtok(line, " \n\t");
 	while (token)
 	{
-		if (i >= chunk - 1) 
+		if (i >= chunk - 1)
 		{
 			tmp = realloc(str, (chunk * 2) * sizeof(char *));
 			if (tmp == NULL)
@@ -44,10 +44,16 @@ char **split(char *line)
 	str[i] = NULL;
 	return (str);
 }
-
+/**
+ * free_tokens - function that free the tokens
+ * @tokens: The tokens that to be freed
+ * @count: the count of the blocks
+ * return: nothing
+ */
 void free_tokens(char **tokens, int count)
 {
 	int i;
+
 	for (i = 0; i < count; i++)
 		free(tokens[i]);
 	free(tokens);

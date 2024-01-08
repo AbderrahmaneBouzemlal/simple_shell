@@ -41,7 +41,6 @@ int loop(char **env, char **av)
 		free(str[i]);
 	free(str);
 	}
-	
 	free(line);
 	return (retu_exec);
 }

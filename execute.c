@@ -9,30 +9,15 @@
 int execute(char **argv, char **env, char **av)
 {
 	pid_t chpro;
-	long stts = 0;
-	char *endptr;
 	int status;
 	char *command = NULL;
 
 	if (argv == NULL || argv[0] == NULL)
 		return (0);
+
 	if (strcmp(argv[0], "exit") == 0)
-	{
-		if (!argv[1])
-			exit(0);
-		else
-		{
-			stts = strtol(argv[1], &endptr, 10);
-			if (*endptr == '\0')
-			{
-				if (stts < 0)
-					return (5);
-				exit((int)stts);
-			}
-			else
-				return (5);
-		}
-	}
+		return (my_exit(argv[1]));
+
 	if (access(argv[0], F_OK) == 0)
 		command = argv[0];
 	else
@@ -62,4 +47,20 @@ int execute(char **argv, char **env, char **av)
 			return (WEXITSTATUS(status));
 	}
 	return (0);
+}
+int my_exit(char *arg)
+{
+	long stts = 0;
+	char *endptr;
+
+	if (!arg)
+		exit(0);
+	stts = strtol(arg, &endptr, 10);
+	if (*endptr == '\0')
+	{
+		if (stts < 0)
+			return (5);
+		exit((int)stts);
+	}
+	return (5);
 }

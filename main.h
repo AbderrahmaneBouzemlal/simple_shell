@@ -30,4 +30,5 @@ char *_getenv(const char *var);
 int err_handle(int error_number, char *shell_name, int count, char *command, char *Argument, char *errorText);
 ssize_t my_getline(char **pline, size_t *len,FILE *fp);
 char *find_command(char *command, char *token);
+int my_exit(char *arg);
 #endif

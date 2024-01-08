@@ -38,17 +38,12 @@ ssize_t my_getline(char **pline, size_t *len, FILE *fp)
 			*len *= 2;
 			temp = realloc(*pline, *len);
 			if (temp == NULL)
-			{
-				perror("Unable to reallocate memory for the line buffer.");
 				return (-1);
-			}
 			*pline = temp;
 		}
 	}
 	(*pline)[i] = '\0';
 	if (c == EOF && i == 0)
-	{
 		return (-1);
-	}
 	return (i);
 }
