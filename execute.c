@@ -32,30 +32,30 @@ int execute(char **argv, char **env, char **av)
 			return (127);
 	}
 	chpro = fork();
-  	if (chpro == -1)
-	{
-		perror(av[0]);
-		free(command);
-		exit(1);
-	}
 	if (chpro == 0)
 	{
 		if (execve(command, argv, env) == -1)
-		{
 			perror(av[0]);
-			free(command);
-			exit(1);
-		}
+		free(command);
+		exit(EXIT_FAILURE);
 	}
+	else if (chpro < 0)
+        {
+		perror(av[0]);
+		free(command);
+		exit(EXIT_FAILURE);
+        }
+
 	else
 	{
-		waitpid(chpro, &status, 0);
-		if (command != argv[0])
-			free(command);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
+		do 
+		{
+			waitpid(chpro, &status, WUNTRACED);
+			if (command != argv[0])
+				free(command);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (0);
+	return (1);
 }
 /**
  * my_exit - function that handle the exit command line
@@ -73,9 +73,8 @@ int my_exit(char *arg)
 	if (*endptr == '\0')
 	{
 		if (stts < 0)
-			return (5);
+			return (2);
 		exit((int)stts);
 	}
-	return (5);
+	return (2);
 }
-

@@ -14,9 +14,9 @@ int err_handle(int error_number, char *shell_name,
 {
 	int r;
 
-	if (error_number != 5)
+	if (error_number == 127)
 		r = fprintf(stderr, "%s: %d: %s: %s", shell_name, count, command, errorText);
-	else
+	else if (error_number == 2)
 	{
 		strcat(Argument, "\n");
 		errorText = "Illegal number";
