@@ -51,7 +51,7 @@ int execute(char **argv, char **env, char **av)
 /**
  * my_exit - function that handle the exit command line
  * @arg: The argument of the command
- * return: The exit status
+ * Return: The exit status
  */
 int my_exit(char *arg)
 {
