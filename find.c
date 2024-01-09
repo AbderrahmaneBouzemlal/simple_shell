@@ -26,7 +26,8 @@ char *find(char *command)
 /**
  * find_command - search for the command in the token
  * @token: the token
- * return: the full command and NULL when failled
+ * @command: the command
+ * Return: the full command and NULL when failled
  */
 char *find_command(char *command, char *token)
 {
