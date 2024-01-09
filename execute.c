@@ -35,7 +35,7 @@ int execute(char **argv, char **env, char **av)
 		{
 			perror(av[0]);
 			free(command);
-			_exit(2);
+			exit(2);
 		}
 	}
 	else
