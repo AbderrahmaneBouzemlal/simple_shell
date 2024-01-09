@@ -35,8 +35,8 @@ int loop(char **env, char **av)
 		continue;
 	}
 	retu_exec = execute(str, env, av);
-	/*if (retu_exec != 0)
-		err_handle(retu_exec, av[0], count, str[0], str[1], "not found\n");*/
+	if (retu_exec != 0)
+		err_handle(retu_exec, av[0], count, str[0], str[1], "not found\n");
 	for (i = 0; str[i] != NULL; i++)
 		free(str[i]);
 	free(str);

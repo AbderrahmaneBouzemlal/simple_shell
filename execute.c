@@ -21,7 +21,7 @@ int execute(char **argv, char **env, char **av)
 		return (0);
 	}
 	if (strcmp(argv[0], "exit") == 0)
-		my_exit(argv[1]);
+		return (my_exit(argv[1]));
 
 	if (access(argv[0], F_OK) == 0)
 		command = argv[0];
@@ -29,10 +29,7 @@ int execute(char **argv, char **env, char **av)
 	{
 		command = find(argv[0]);
 		if (command == NULL)
-		{
-			perror(argv[0]);
 			return (127);
-		}
 	}
 	chpro = fork();
   	if (chpro == -1)
@@ -65,7 +62,7 @@ int execute(char **argv, char **env, char **av)
  * @arg: The argument of the command
  * Return: The exit status
  */
-void my_exit(char *arg)
+int my_exit(char *arg)
 {
 	long stts = 0;
 	char *endptr;
@@ -75,6 +72,10 @@ void my_exit(char *arg)
 	stts = strtol(arg, &endptr, 10);
 	if (*endptr == '\0')
 	{
+		if (stts < 0)
+			return (5);
 		exit((int)stts);
 	}
+	return (5);
 }
+
