@@ -24,18 +24,25 @@ int execute(char **argv, char **env, char **av)
 	{
 		command = find(argv[0]);
 		if (command == NULL)
+		{
+			perror(argv[0]);
 			return (127);
+		}
 	}
 	chpro = fork();
 	if (chpro == -1)
+	{
+		perror(av[0]);
+		free(command);
 		exit(1);
+	}
 	if (chpro == 0)
 	{
 		if (execve(command, argv, env) == -1)
 		{
 			perror(av[0]);
 			free(command);
-			exit(2);
+			exit(1);
 		}
 	}
 	else
@@ -64,8 +71,13 @@ int my_exit(char *arg)
 	if (*endptr == '\0')
 	{
 		if (stts < 0)
+		{
+			perror("exit");
 			return (5);
+		}
+
 		exit((int)stts);
 	}
+	perror("exit f");
 	return (5);
 }
