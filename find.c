@@ -36,7 +36,7 @@ char *find_command(char *command, char *token)
 
 	while (token)
 	{
-		cmd_full = malloc(_strlen(token) + _strlen(command) + 2);
+		cmd_full = malloc(strlen(token) + strlen(command) + 2);
 		if (cmd_full == NULL)
 			return (NULL);
 

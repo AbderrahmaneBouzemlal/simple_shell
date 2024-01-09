@@ -19,7 +19,7 @@ char *_getenv(const char *var)
 	}
 	len = np - var;
 	for (p = environ; (c = *p) != NULL; ++p)
-		if (_strncmp(c, var, len) == 0 && c[len] == '=')
+		if (strncmp(c, var, len) == 0 && c[len] == '=')
 		{
 			return (c + len + 1);
 		}
