@@ -15,6 +15,8 @@ int execute(char **argv, char **env, char **av)
 	if (argv == NULL || argv[0] == NULL)
 		return (0);
 
+	if (strcmp(argv[0], "env") == 0)
+		my_env(env);
 	if (strcmp(argv[0], "exit") == 0)
 		return (my_exit(argv[1]));
 
@@ -30,7 +32,7 @@ int execute(char **argv, char **env, char **av)
 		}
 	}
 	chpro = fork();
-	if (chpro == -1)
+  	if (chpro == -1)
 	{
 		perror(av[0]);
 		free(command);
@@ -78,6 +80,6 @@ int my_exit(char *arg)
 
 		exit((int)stts);
 	}
-	perror("exit f");
+	perror("exit");
 	return (5);
 }
