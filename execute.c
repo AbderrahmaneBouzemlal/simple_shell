@@ -65,7 +65,7 @@ int my_exit(char *arg)
 	{
 		if (stts < 0)
 			return (5);
-		exit((int)stts);
+		_exit((int)stts);
 	}
 	return (5);
 }
