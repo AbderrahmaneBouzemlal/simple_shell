@@ -16,7 +16,10 @@ int execute(char **argv, char **env, char **av)
 		return (0);
 
 	if (strcmp(argv[0], "env") == 0)
+	{
 		my_env(env);
+		return (0);
+	}
 	if (strcmp(argv[0], "exit") == 0)
 		my_exit(argv[1]);
 
