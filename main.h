@@ -1,11 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 #define BUFFER_SIZE 1024
-#define MAX_ALIASES 10
-#define MAX_ALIAS_NAME_LENGTH 50
-#define MAX_ALIAS_VALUE_LENGTH 100
-char alias_names[MAX_ALIASES][MAX_ALIAS_NAME_LENGTH];
-char alias_values[MAX_ALIASES][MAX_ALIAS_VALUE_LENGTH];
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
