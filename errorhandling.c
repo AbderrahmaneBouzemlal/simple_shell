@@ -12,16 +12,14 @@
 int err_handle(int error_number, char *shell_name,
 		int count, char *command, char *Argument, char *errorText)
 {
-	int r;
-
 	if (error_number == 127)
-		r = fprintf(stderr, "%s: %d: %s: %s", shell_name, count, command, errorText);
+		fprintf(stderr, "%s: %d: %s: %s", shell_name, count, command, errorText);
 	else if (error_number == 2)
 	{
 		strcat(Argument, "\n");
 		errorText = "Illegal number";
-		r = fprintf(stderr, "%s: %d: %s: %s: %s",
+		fprintf(stderr, "%s: %d: %s: %s: %s",
 				shell_name, count, command, errorText, Argument);
 	}
-	return (r);
+	return (error_number);
 }

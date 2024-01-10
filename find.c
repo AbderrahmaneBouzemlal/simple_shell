@@ -20,7 +20,10 @@ char *find(char *command)
 	{
 		path = _getenv("PATH");
 		if (path == NULL)
-			return (NULL);
+		{
+			free(command);
+			return (cmd_full);
+		}
 		path_copy = strdup(path);
 		if (path_copy == NULL)
 			return (NULL);

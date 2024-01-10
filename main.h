@@ -10,6 +10,10 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <math.h>
+void print_aliases();
+void print_alias(char *name);
+void define_alias(char *name, char *value);
+void handle_alias(char **argv);
 int change_directory(char *path);
 void free_tokens(char **tokens, int count);
 extern char **environ;

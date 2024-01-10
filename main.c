@@ -8,8 +8,9 @@
  */
 int main(int ac, char **av, char **env)
 {
+	int i;
 	(void)ac;
 
-	loop(env, av);
-	return (EXIT_SUCCESS);
+	i = loop(env, av);
+	return (i);
 }
