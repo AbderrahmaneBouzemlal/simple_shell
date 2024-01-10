@@ -10,6 +10,10 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <math.h>
+int count_env_variables(void);
+void remove_env_variable(int index);
+void add_env_variable(char *variable, char *value);
+char *variable_and_value(char *variable, char *value);
 void free_tokens(char **tokens, int count);
 extern char **environ;
 char *_strtok(char *srcString, const char *delim);
@@ -27,4 +31,6 @@ char *find_command(char *command, char *token);
 int my_exit(char *arg);
 void my_env(char **env);
 void execute_command(char *command, char **argv, char **env, char **av);
+int my_unsetenv(char *varaible);
+int my_setenv(char *variable, char *value);
 #endif

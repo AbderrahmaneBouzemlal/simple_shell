@@ -42,14 +42,17 @@ int execute(char **argv, char **env, char **av)
 	char *command;
 	if (argv == NULL || argv[0] == NULL)
 		return (0);
-	if (strcmp(argv[0], "env") == 0)
+	else if (strcmp(argv[0], "env") == 0)
 	{
 		my_env(env);
 		return (0);
 	}
-
-	if (strcmp(argv[0], "exit") == 0)
-		return my_exit(argv[1]);
+	else if (strcmp(argv[0], "exit") == 0)
+		return (my_exit(argv[1]));
+	else if (strcmp(argv[0], "setenv") == 0)
+		return (my_setenv(argv[0], argv[1]));
+	else if (strcmp(argv[0], "unsetenv") == 0)
+		return (my_unsetenv(argv[0]));
 
 	command = find(argv[0]);
 
