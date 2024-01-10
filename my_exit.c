@@ -10,16 +10,12 @@ int my_exit(char *arg)
 	char *endptr;
 
 	if (!arg)
-	{
-		killpg(getpgrp(), SIGTERM);
 		exit(0);
-	}
 	stts = strtol(arg, &endptr, 10);
 	if (*endptr == '\0')
 	{
 		if (stts < 0)
 			return (2);
-		killpg(getpgrp(), SIGTERM);
 		exit((int)stts);
 	}
 	return (2);

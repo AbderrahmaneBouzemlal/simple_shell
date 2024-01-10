@@ -17,11 +17,13 @@ void execute_command(char *command, char **argv, char **env, char **av)
 	{
 		if (execve(command, argv, env) == -1)
 			perror(av[0]);
+		free(command);
 		exit(EXIT_FAILURE);
 	}
 	else if (child_pid < 0)
 	{
 		perror(av[0]);
+		free(command);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -29,6 +31,8 @@ void execute_command(char *command, char **argv, char **env, char **av)
 		do {
 			waitpid(child_pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		if (command != argv[0])
+				free(command);
 	}
 }
 /**
