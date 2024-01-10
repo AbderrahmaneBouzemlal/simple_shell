@@ -64,6 +64,8 @@ int execute(char **argv, char **env, char **av)
 	}
 	else if (strcmp(argv[0], "unsetenv") == 0)
 		return (my_unsetenv(argv[0]));
+	else if (strcmp(argv[0], "cd") == 0)
+		return (change_directory(argv[1]));
 
 	command = find(argv[0]);
 	if (command == NULL)

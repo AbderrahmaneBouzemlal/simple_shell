@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <math.h>
+int change_directory(char *path);
 void free_tokens(char **tokens, int count);
 extern char **environ;
 char *_strtok(char *srcString, const char *delim);
