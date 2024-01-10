@@ -6,6 +6,7 @@
  */
 char *find(char *command)
 {
+	struct stat st;
 	char *path;
 	char *path_copy;
 	char *token;
@@ -13,14 +14,19 @@ char *find(char *command)
 
 	if (command == NULL)
 		return (NULL);
-	path = _getenv("PATH");
-	if (path == NULL)
-		return (NULL);
-	path_copy = strdup(path);
-	if (path_copy == NULL)
-		return (NULL);
-	token = _strtok(path_copy, ":");
-	cmd_full = find_command(command, token);
+	else if (stat(command, &st) == 0)
+		cmd_full = strdup(command);
+	else
+	{
+		path = _getenv("PATH");
+		if (path == NULL)
+			return (NULL);
+		path_copy = strdup(path);
+		if (path_copy == NULL)
+			return (NULL);
+		token = _strtok(path_copy, ":");
+		cmd_full = find_command(command, token);
+	}
 	return (cmd_full);
 }
 /**

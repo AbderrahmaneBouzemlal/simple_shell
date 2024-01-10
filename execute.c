@@ -33,9 +33,7 @@ void execute_command(char *command, char **argv, char **env, char **av)
 		}
 		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 		if (command != argv[0])
-		{
 			free(command);
-		}
 	}
 }
 
