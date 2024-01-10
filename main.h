@@ -26,4 +26,5 @@ ssize_t my_getline(char **pline, size_t *len, FILE *fp);
 char *find_command(char *command, char *token);
 int my_exit(char *arg);
 void my_env(char **env);
+void execute_command(char *command, char **argv, char **env, char **av);
 #endif

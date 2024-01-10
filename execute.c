@@ -15,12 +15,9 @@ void execute_command(char *command, char **argv, char **env, char **av)
 	if (child_pid == 0)
 	{
 		if (execve(command, argv, env) == -1)
-		{
 			perror(av[0]);
-			free(command);
-			exit(EXIT_FAILURE);
-		}
-
+		free(command);
+		exit(EXIT_FAILURE);
 	}
 	else if (child_pid < 0)
 	{
