@@ -19,4 +19,4 @@ int my_exit(char *arg)
 		exit((int)stts);
 	}
 	return (2);
-} 
+}
