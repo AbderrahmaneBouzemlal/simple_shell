@@ -32,7 +32,7 @@ void execute_command(char *command, char **argv, char **env, char **av)
 			waitpid(child_pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 		if (command != argv[0])
-				free(command);
+			free(command);
 	}
 }
 /**
