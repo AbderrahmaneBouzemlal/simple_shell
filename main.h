@@ -10,6 +10,11 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <math.h>
+#include <stddef.h>
+char *_strdup(char *str);
+char* my_strcpy(char *dest, char *src);
+char* my_strcat(char *dest, char *src);
+int my_strlen(char *str);
 void print_aliases(void);
 void print_alias(char *name);
 void define_alias(char *name, char *value);
@@ -29,7 +34,7 @@ int err_handle(int error_number, char *shell_name, int count,
 		char *command, char *Argument, char *errorText);
 ssize_t my_getline(char **pline, size_t *len, FILE *fp);
 char *find_command(char *command, char *token);
-int my_exit(char *arg);
+void my_exit(char *arg);
 void my_env(char **env);
 void execute_command(char *command, char **argv, char **env, char **av);
 int my_unsetenv(char *varaible);

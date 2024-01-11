@@ -16,9 +16,10 @@ void execute_command(char *command, char **argv, char **env, char **av)
 	if (child_pid == 0)
 	{
 		if (execve(command, argv, env) == -1)
+		{
 			perror(av[0]);
-		free(command);
-		exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
+		}
 	}
 	else if (child_pid < 0)
 	{
@@ -54,13 +55,13 @@ int execute(char **argv, char **env, char **av)
 		return (0);
 	}
 	else if (strcmp(argv[0], "exit") == 0)
-		return (my_exit(argv[1]));
+		my_exit(argv[1]);
 	else if (strcmp(argv[0], "setenv") == 0)
 	{
 		if (argv[1] != NULL && argv[2] != NULL)
 			return (my_setenv(argv[0], argv[1]));
-		fprintf(stderr, "Usage: setenv VARIABlE VALUE\n");
-		return (0);
+		perror("few arguments");
+		return (1);
 	}
 	else if (strcmp(argv[0], "unsetenv") == 0)
 		return (my_unsetenv(argv[0]));
@@ -69,7 +70,10 @@ int execute(char **argv, char **env, char **av)
 
 	command = find(argv[0]);
 	if (command == NULL)
+	{
+		perror(command);
 		return (127);
+	}
 
 	execute_command(command, argv, env, av);
 

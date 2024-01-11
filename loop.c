@@ -9,7 +9,7 @@
 int loop(char **env, char **av)
 {
 	int count = 0, retu_exec, i;
-	char **str;
+	char **str = NULL;
 	char *line = NULL;
 	size_t n = 0;
 	ssize_t read;
@@ -18,29 +18,28 @@ int loop(char **env, char **av)
 	{
 		count++;
 		if (isatty(STDIN_FILENO) == 1)
+		{
 			write(1, "$ ", 2);
+			fflush(stdout);
+		}
 		read = getline(&line, &n, stdin);
-	if (read == -1)
-	{
-		if (isatty(STDIN_FILENO) == 1)
-			write(1, "\n", 1);
-		break;
-	}
-	str = split(line);
-	if (str == NULL)
-	{
+		if (read == -1)
+		{
+			if (isatty(STDIN_FILENO) == 1)
+				write(1, "\n", 1);
+			break;
+		}
+		str = split(line);
+		if (str == NULL)
+		{
+			perror("split");
+			continue;
+		}
+		retu_exec = execute(str, env, av);
 		for (i = 0; str[i] != NULL; i++)
 			free(str[i]);
 		free(str);
-		continue;
-	}
-	retu_exec = execute(str, env, av);
-	if (retu_exec != 0)
-		err_handle(retu_exec, av[0], count, str[0], str[1], "not found\n");
-	for (i = 0; str[i] != NULL; i++)
-		free(str[i]);
-	free(str);
-	}
+		}
 	free(line);
 	return (retu_exec);
 }

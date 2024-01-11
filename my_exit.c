@@ -4,7 +4,7 @@
  * @arg: The argument of the command
  * Return: The exit status
  */
-int my_exit(char *arg)
+void my_exit(char *arg)
 {
 	long stts = 0;
 	char *endptr;
@@ -14,9 +14,13 @@ int my_exit(char *arg)
 	stts = strtol(arg, &endptr, 10);
 	if (*endptr == '\0')
 	{
-		if (stts < 0)
-			return (2);
-		exit((int)stts);
+		perror("exit");
+		exit(2);
 	}
-	return (2);
+	if (stts < 0)
+	{
+		perror("exit");
+		exit(2);
+	}
+	exit((int)stts);
 }

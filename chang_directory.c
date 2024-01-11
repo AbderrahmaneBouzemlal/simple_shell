@@ -13,7 +13,7 @@ int change_directory(char *path)
 		path = _getenv("HOME");
 		if (path == NULL)
 		{
-			fprintf(stderr, "cd: HOME not set\n");
+			perror("cd");
 			return (1);
 		}
 	}
@@ -22,7 +22,7 @@ int change_directory(char *path)
 		path = _getenv("OLDPWD");
 		if (path == NULL)
 		{
-			fprintf(stderr, "cd: OLDPWD not set\n");
+			perror("path");
 			return (1);
 		}
 	}

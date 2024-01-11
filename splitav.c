@@ -32,7 +32,7 @@ char **split(char *line)
 			str = tmp;
 			chunk *= 2;
 		}
-		str[i] = strdup(token);
+		str[i] = _strdup(token);
 		if (str[i] == NULL)
 		{
 			free_tokens(str, i);
