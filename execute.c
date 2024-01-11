@@ -71,10 +71,7 @@ int execute(char **argv, char **env, char **av)
 
 	command = find(argv[0]);
 	if (command == NULL)
-	{
-		perror(command);
 		return (127);
-	}
 
 	execute_command(command, argv, env, av);
 

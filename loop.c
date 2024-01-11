@@ -36,6 +36,8 @@ int loop(char **env, char **av)
 			continue;
 		}
 		retu_exec = execute(str, env, av);
+		if (retu_exec == 127)
+			fprintf(stderr, "%s: %d: %s: not found\n", av[0], count, str[0]);
 		for (i = 0; str[i] != NULL; i++)
 			free(str[i]);
 		free(str);
