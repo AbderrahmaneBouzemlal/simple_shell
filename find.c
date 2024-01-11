@@ -22,7 +22,7 @@ char *find(char *command)
 
 	token = _strtok(path_copy, ":");
 	cmd_full = find_command(command, token);
-
+	free(path_copy);
 	return (cmd_full);
 }
 /**
@@ -48,6 +48,7 @@ char *find_command(char *command, char *token)
 
 		if (stat(cmd_full, &st) == 0)
 			break;
+		free(cmd_full);
 		cmd_full = NULL;
 		token = _strtok(NULL, ":");
 	}
