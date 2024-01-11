@@ -12,8 +12,8 @@
 #include <math.h>
 #include <stddef.h>
 char *_strdup(char *str);
-char* my_strcpy(char *dest, char *src);
-char* my_strcat(char *dest, char *src);
+char *my_strcpy(char *dest, char *src);
+char *my_strcat(char *dest, char *src);
 int my_strlen(char *str);
 void print_aliases(void);
 void print_alias(char *name);
