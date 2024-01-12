@@ -11,14 +11,12 @@
 #include <ctype.h>
 #include <math.h>
 #include <stddef.h>
+#include <signal.h>
+void cleanup(char** tokens, char *line_buffer);
 char *_strdup(char *str);
 char *my_strcpy(char *dest, char *src);
 char *my_strcat(char *dest, char *src);
 int my_strlen(char *str);
-void print_aliases(void);
-void print_alias(char *name);
-void define_alias(char *name, char *value);
-void handle_alias(char **argv);
 int change_directory(char *path);
 void free_tokens(char **tokens, int count);
 extern char **environ;
@@ -34,7 +32,7 @@ int err_handle(int error_number, char *shell_name, int count,
 		char *command, char *Argument, char *errorText);
 ssize_t my_getline(char **pline, size_t *len, FILE *fp);
 char *find_command(char *command, char *token);
-void my_exit(char *arg);
+int my_exit(char *arg, char **tokens, char *line_buffer);
 void my_env(char **env);
 void execute_command(char *command, char **argv, char **env, char **av);
 int my_unsetenv(char *varaible);

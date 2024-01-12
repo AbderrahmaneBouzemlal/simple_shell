@@ -56,7 +56,7 @@ int execute(char **argv, char **env, char **av)
 		return (0);
 	}
 	else if (strcmp(argv[0], "exit") == 0)
-		my_exit(argv[1]);
+		return (-5);
 	else if (strcmp(argv[0], "setenv") == 0)
 	{
 		if (argv[1] != NULL && argv[2] != NULL)
