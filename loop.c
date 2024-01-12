@@ -49,16 +49,8 @@ int loop(char **env, char **av)
 			continue;
 		}
 		retu_exec = execute(str, env, av);
-		if (retu_exec == 127)
-			fprintf(stderr, "%s: %d: %s: not found\n"
-					, av[0], count, str[0]);
-		else if (retu_exec == -5)
-		{
-			retu_exec = my_exit(str[1], str, line);
-			if (retu_exec == 2)
-				fprintf(stderr, "%s: %d: %s: Illegal number: %s\n"
-						, av[0], count, str[0], str[1]);
-		}
+		retu_exec = err_hand(retu_exec, av[0], count, str[0], str[1]
+				, line, str);
 
 		for (i = 0; str[i] != NULL; i++)
 			free(str[i]);

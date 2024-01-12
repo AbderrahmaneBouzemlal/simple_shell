@@ -13,10 +13,10 @@ char *find(char *command)
 	char *cmd_full = NULL;
 
 	if (stat(command, &st) == 0)
-		return(command);
+		return (command);
 	path = _getenv("PATH");
 	if (!path)
-		return(NULL);
+		return (NULL);
 	if (command == NULL || path == NULL)
 		return (NULL);
 	if (stat(command, &st) == 0)

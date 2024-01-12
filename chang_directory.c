@@ -11,31 +11,20 @@ int change_directory(char *path)
 	if (path == NULL)
 	{
 		path = _getenv("HOME");
-		if (path == NULL)
-		{
-			perror("cd");
-			return (1);
-		}
+		if (!path)
+			return (0);
 	}
 	else if (strcmp(path, "-") == 0)
 	{
 		path = _getenv("OLDPWD");
-		if (path == NULL)
-		{
-			perror("path");
-			return (1);
-		}
+		printf("%s\n", path);
+		if (!path)
+			return (0);
 	}
 	if (getcwd(curr_path, sizeof(curr_path)) == NULL)
-	{
-		perror("cd");
-		return (1);
-	}
+		return (-7);
 	if (chdir(path) == -1)
-	{
-		perror("cd");
-		return (1);
-	}
+		return (-7);
 	my_setenv("PWD", getcwd(curr_path, sizeof(curr_path)));
 	return (0);
 }
