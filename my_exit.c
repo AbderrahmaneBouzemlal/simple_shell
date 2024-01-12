@@ -2,7 +2,9 @@
 /**
  * my_exit - function that handle the exit command line
  * @arg: The argument of the command
- * Return: The exit status
+ * @tokens: The tokens
+ * @line_buffer: The line buffer
+ * Return: 0 on success, 1 on failure
  */
 int my_exit(char *arg, char **tokens, char *line_buffer)
 {
@@ -21,6 +23,12 @@ int my_exit(char *arg, char **tokens, char *line_buffer)
 	cleanup(tokens, line_buffer);
 	exit((int)stts);
 }
+/**
+ * cleanup - function that free the memory
+ * @tokens: The tokens
+ * @line_buffer: The line buffer
+ * Return: Nothing
+ */
 void cleanup(char **tokens, char *line_buffer)
 {
 	int i;

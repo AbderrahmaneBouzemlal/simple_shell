@@ -12,7 +12,8 @@
 #include <math.h>
 #include <stddef.h>
 #include <signal.h>
-void cleanup(char** tokens, char *line_buffer);
+void catch_int(int sig_num);
+void cleanup(char **tokens, char *line_buffer);
 char *_strdup(char *str);
 char *my_strcpy(char *dest, char *src);
 char *my_strcat(char *dest, char *src);

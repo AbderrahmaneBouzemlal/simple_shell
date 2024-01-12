@@ -7,15 +7,20 @@
 char *find(char *command)
 {
 	struct stat st;
-	char *path = _getenv("PATH");
+	char *path;
 	char *path_copy;
 	char *token;
 	char *cmd_full = NULL;
 
+	if (stat(command, &st) == 0)
+		return(command);
+	path = _getenv("PATH");
+	if (!path)
+		return(NULL);
 	if (command == NULL || path == NULL)
 		return (NULL);
 	if (stat(command, &st) == 0)
-		return (_strdup(command));
+		return (command);
 	path_copy = _strdup(path);
 	if (!path_copy)
 		return (NULL);

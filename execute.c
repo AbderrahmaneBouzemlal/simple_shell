@@ -11,11 +11,12 @@ void execute_command(char *command, char **argv, char **env, char **av)
 {
 	pid_t child_pid;
 	int status;
+	(void)env;
 
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		if (execve(command, argv, env) == -1)
+		if (execve(command, argv, environ) == -1)
 		{
 			perror(av[0]);
 			_exit(EXIT_FAILURE);

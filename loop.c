@@ -1,6 +1,10 @@
 #include "main.h"
 #include "string.h"
-void catch_int(int sig_num);
+/**
+ * catch_int - function that handle the ctrl + c
+ * @sig_num: The signal number
+ * Return: Nothing
+ */
 void catch_int(int sig_num)
 {
 	(void)sig_num;

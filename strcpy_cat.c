@@ -1,23 +1,41 @@
 #include "main.h"
-
-char* my_strcpy(char *dest, char *src)
+/**
+ * my_strcpy - copying from src to dest
+ * @dest: ptr to a string
+ * @src: ptr to a string
+ * Return: a ptr to a string
+ */
+char *my_strcpy(char *dest, char *src)
 {
 	char *originalDest = dest;
 
-	while ((*dest++ = *src++) != '\0');
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
 	return (originalDest);
 }
-
-char* my_strcat(char *dest, char *src)
+/**
+ * my_strcat - concatenate src to dest
+ * @dest: ptr to a string
+ * @src: ptr to a string
+ * Return: a ptr to a string
+ */
+char *my_strcat(char *dest, char *src)
 {
 	char *originalDest = dest;
 
 	while (*dest != '\0')
-	{
 		dest++;
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
 	}
-
-	while ((*dest++ = *src++) != '\0');
-
+	*dest = '\0';
 	return (originalDest);
 }
